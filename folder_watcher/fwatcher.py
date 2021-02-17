@@ -33,6 +33,9 @@ class Watcher:
         except Exception as e:
             self.stop_observers()
             log.critical(f"Error when watching folders{str(e)}")
+        except KeyboardInterrupt as e:
+            self.stop_observers()
+            log.info(f"Finishing process normally")
 
 
     def stop_observers(self):
@@ -54,6 +57,8 @@ class Handler(FileSystemEventHandler):
                 log.info(f"Printing {event.src_path}")
                 p_driver = pd(ap_params['PRINTER_NAME'])
                 p_driver.print(event.src_path)
+                if ap_params["AUTODELETE"]:
+                    os.remove(event.src_path)
 
 
 def checkIfExtensionMatch(filename):

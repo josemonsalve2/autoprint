@@ -16,14 +16,19 @@ class printer_driver:
     """Communicate with the CUPS driver via lpr command
     """
     def print_linux_unix(self, filename):
-        out = ""
-        if self.printer_name:
-            out = subprocess.run(['lpr',"-d", self.printer_name, filename], shell = True, capture_output = True )
-        else:
-            out = subprocess.run(['lpr', filename], shell = True, capture_output = True )
-        if out.stderr:
+        out = None
+        try:
+            if self.printer_name:
+                log.info(f"printing {str(['lpr','-d', self.printer_name, filename])}")
+                out = subprocess.run(['lpr',"-d", self.printer_name, filename], capture_output = True, timeout=20 )
+            else:
+                log.info(f"printing {str(['lpr', filename])}")
+                out = subprocess.run(['lpr', filename], capture_output = True, timeout=20 )
+        except subprocess.TimeoutExpired:
+            log.error("Command took really long. Timeout")
+        if out and out.stderr:
             log.error(f"Error when printing {out.stderr}")
-        if out.stdout:
+        if out and out.stdout:
             log.info(f"Output when printing {out.stdout}")
 
     """ Communicate with windows print driver via command

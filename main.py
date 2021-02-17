@@ -15,9 +15,11 @@ def params_reader():
             with open(ap_params["CONFIG_FILE"]) as f:
                 params = json.load(f)
                 # Iterate over params and search in JSON config file
-                for key,val in ap_params.items():
-                    if key in params:
-                        ap_params[key] = params[key]
+                for key, val in ap_params.items():
+                    if key in params[0]:
+                        ap_params[key] = params[0][key]
+                        log.info(f"Setting {key} = {params[0][key]}")
+
         except Exception as e:
             log.error(f"ERROR When opening Config file {ap_params['CONFIG_FILE']} \n {str(e)}")
     else:

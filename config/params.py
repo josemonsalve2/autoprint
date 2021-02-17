@@ -16,6 +16,7 @@ ap_params = {
     "EXTENSIONS_FILTER" : [], # List of extensions to print. Must be an array
     "FILES_PREFIX" : [],
 
-    "WAITING_TIME" : 1
+    "WAITING_TIME" : 1,
+    "AUTODELETE": False
 }
 

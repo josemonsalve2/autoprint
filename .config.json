@@ -1,0 +1,10 @@
+[{
+    "LOG_LEVEL" : "DEBUG",
+    "[REMOVEME]LOG_FILE" : "autoprint.log",
+    "[REMOVEME]PRINTER_NAME" : "PRINTER NAME",
+    "FOLDERS_TO_WATCH" : ["/Users/josem/Downloads"],
+    "EXTENSIONS_FILTER" : [".pdf", ".txt"],
+    "FILES_PREFIX" : [],
+    "WAITING_TIME" : 1,
+    "AUTODELETE": true
+}]
